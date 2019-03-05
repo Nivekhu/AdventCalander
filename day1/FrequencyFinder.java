@@ -6,11 +6,10 @@ public class FrequencyFinder{
 		File input = new File("input.txt");
 		Scanner in = new Scanner(new FileInputStream(input));
 		HashSet<Integer> values = new HashSet<Integer>();
-		boolean stop = false;
 		int modifier = 0;
 		int result = 0;
 		values.add(result);
-		while(!stop){
+		while(true){
 			if(!in.hasNext()){
 				in = new Scanner(new FileInputStream(input));
 			}
@@ -19,7 +18,7 @@ public class FrequencyFinder{
 				result += modifier;
 				if(values.contains(result)){
 					System.out.println(result);
-					stop = true;
+					break;
 				}
 				else{
 					values.add(result);
