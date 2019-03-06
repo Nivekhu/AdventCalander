@@ -2,8 +2,14 @@ import java.util.*;
 
 public class Checksum{
 	public static void main(String args[]){
-		partOne();
-		partTwo();
+	    if(args.length == 0)
+			System.out.println("Please input either 1 or 2. Example: Checksum 1");
+		else if(args[0].equals("1"))
+			partOne();
+		else if(args[0].equals("2"))
+			partTwo();
+		else
+			System.out.println("Please input either 1 or 2. Example: Checksum 1");
 	}
 
 	public static void partOne(){
@@ -33,16 +39,47 @@ public class Checksum{
 			}
 
 			results = charData.values();                   //Holds the values
-			if(results.contains(2))                        //Increments 2 once
-					twoLetter++;
-			if(results.contains(3))                        //Increments 3 once
-					threeLetter++;
+			twoLetter += results.contains(2)   ? 1 : 0;	   //incriments if 2 is found
+			threeLetter += results.contains(3) ? 1 : 0;    //incriments if 3 is found
 			charData.clear();                              //Clears the hashmap
 		}
 		System.out.println(twoLetter * threeLetter);       //Outputs the answer
 	}
 
 	public static void partTwo(){
+		//Takes the input and places it into an arraylist
+		Scanner in = new Scanner(System.in);
+		ArrayList<String> input = new ArrayList<String>();
+		while(in.hasNext()){
+			input.add(in.nextLine());
+		}
 		
+		//out of loop variables
+		String longest = "";
+
+		//in Loop variables	
+		String curLine;
+		String compLine;
+		String curString = "";
+		char curChar;
+
+		//Runs n
+		for(int i = 0; i < input.size(); i++){
+			curLine = input.get(i);
+			//Runs Log(n)
+			for(int j = i+1; j < input.size(); j++){
+				compLine = input.get(j);
+				for(int k = 0; k < curLine.length(); k++){
+					if(curLine.charAt(k) == compLine.charAt(k))
+						curString = curString + curLine.charAt(k);
+				}
+				if(curString.length() > longest.length())
+					longest = curString;
+				curString = "";
+
+			}
+		}
+
+		System.out.println(longest);
 	}
 }
